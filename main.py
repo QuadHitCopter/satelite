@@ -23,6 +23,8 @@ port = 5000
 s = socket.socket(socket.AF_INET,
                   socket.SOCK_STREAM)
 
+
+
 #
 ff = True
 bb = 0
@@ -36,6 +38,7 @@ def check(ss):
 while ff == True:
 	try:
 		s.connect(('192.168.0.12', port))
+
 	except:
 		bb = bb+1
 		print(f"Fallo n°{bb}")
@@ -71,6 +74,8 @@ while loop == True and msg:
 	print(f"Mode:{haise.state}||BAT: {haise.bat_state}||V5: {haise.v5_state}||CAM: {haise.cam_state}||ADCs:{haise.adc_state}")
 	sleep(0.05)
 	msg = s.recv(1024)
+	lista = str(["hola",1]).encode()
+	s.send(lista)
 	sleep(0.05)
 
 	com = msg.decode()
@@ -139,7 +144,10 @@ while loop == True and msg:
 	if "NOK" in haise.__dict__.values():
 		haise.state = "SAFE_MODE"
 
-
+	if com == "DEL_YUUMI":
+		clear()
+		print("Gato asqueroso ha sido desintegrado")
+		sleep(10)
 
 	sleep(0.2)
 
